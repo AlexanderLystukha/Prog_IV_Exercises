@@ -1,0 +1,58 @@
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Any, Optional
+
+
+
+@dataclass
+class Node:
+
+    def __init__(self, value: Any, left: Optional[Node], right: Optional[Node]):
+        self.value: Any = value
+        self.left: Optional[Node] = left
+        self.right: Optional[Node] = right
+
+    def __len__(self):
+        length = 1
+
+        if self.left is not None:
+            length += len(self.left)
+
+        if self.right is not None:
+            length += len(self.right)
+
+        return length
+
+    def __contains__(self, item):
+        if item == self.value:
+            return True
+        else:
+            if self.left is not None and item < self.value:
+                if item in self.left:
+                    return True
+
+            if self.right is not None and item > self.value:
+                if item in self.right:
+                    return True
+
+        return False
+
+    def tree_height(self, value: Node):
+        left: int = 0
+        right: int = 0
+
+        if self.left is not None:
+            left = self.tree_height(self.left) + 1
+
+        if self.right is not None:
+            right = self.tree_height(self.right) + 1
+
+        return max(left, right)
+
+
+brandontree: Node = Node(0, Node(100, Node(2, None, None), Node(3, None, None)), Node(4, None, None))
+
+if 0 in brandontree:
+    print("woohoo")
+else:
+    print("wompwomp")
