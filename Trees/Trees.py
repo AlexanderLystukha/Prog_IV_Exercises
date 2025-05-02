@@ -37,6 +37,21 @@ class Node:
 
         return False
 
+    def add(self, item):
+        if item == self.value:
+            return
+        else:
+            if self.left is not None and item < self.value:
+                if not self.left:
+                    self.left = Node(item)
+                else:
+                    self.left.add(item)
+
+            if self.right is not None and item > self.value:
+                if not self.right:
+                    self.right = Node(item)
+                else:
+                    self.right.add(item)
     def tree_height(self, value: Node):
         left: int = 0
         right: int = 0
