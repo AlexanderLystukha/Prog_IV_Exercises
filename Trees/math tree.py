@@ -2,8 +2,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Optional
 
-
-
 @dataclass
 class Node:
 
@@ -48,19 +46,6 @@ class Node:
         else:
             return
 
-    def sort_tree(self):
-
-        if self.left is not None:
-            self.left.sort_tree()
-
-        print(self.value)
-
-        if self.right is not None:
-            self.right.sort_tree()
-
-        else:
-            return
-
     def add(self, item):
         if item == self.value:
             return
@@ -87,27 +72,3 @@ class Node:
             right = self.tree_height(self.right) + 1
 
         return max(left, right)
-
-
-brandontree: Node = Node(15,
-                         Node(10,
-                              Node(8,
-                                   Node(3, None, None),
-                                   Node(9, None, None)),
-                              Node(12,
-                                   Node(11, None, None),
-                                   Node(14, None, None))),
-                         Node(20,
-                              Node(17,
-                                   Node(16, None, None),
-                                   Node(18, None, None)),
-                              Node(25, None, None)))
-
-# if 0 in brandontree:
-#     print("woohoo")
-# else:
-#     print("wompwomp")
-
-for i in (15,10,20,8,12,17,25,3,9,11,14,16,18)
-
-brandontree.sort_tree()
