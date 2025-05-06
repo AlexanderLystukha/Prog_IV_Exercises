@@ -11,6 +11,7 @@ class Node:
         self.value: Any = value
         self.left: Optional[Node] = left
         self.right: Optional[Node] = right
+        self.head: Node = self
 
     def __len__(self):
         length = 1
@@ -76,6 +77,7 @@ class Node:
                     self.right = Node(item)
                 else:
                     self.right.add(item)
+
     def tree_height(self, value: Node):
         left: int = 0
         right: int = 0
@@ -87,6 +89,21 @@ class Node:
             right = self.tree_height(self.right) + 1
 
         return max(left, right)
+
+    def subset(self, low, high) -> list:
+        acc = []
+        self._subset(self.head, low, high, acc)
+        return acc
+
+    def _subset(self, current,low, high, acc: list):
+        if current.left is not None and low < current.value:
+            self._subset(current.left, low, high, acc)
+
+        if low <= current.value <= high:
+            acc.append(current.value)
+
+        if current.right is not None and low < current.value:
+            self._subset(current.right, low, high, acc)
 
 
 brandontree: Node = Node(15,
@@ -108,6 +125,4 @@ brandontree: Node = Node(15,
 # else:
 #     print("wompwomp")
 
-for i in (15,10,20,8,12,17,25,3,9,11,14,16,18)
-
-brandontree.sort_tree()
+print(brandontree.subset(3, 10))
